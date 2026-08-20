@@ -1,0 +1,107 @@
+/* Shares the visual identity of the MonitoringFace results site so the
+   org's pages read as one family. */
+:root {
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --ink: #1c2330;
+  --muted: #667085;
+  --line: #e4e7ec;
+  --accent: #175cd3;
+  --accent-soft: #eff4ff;
+  --ok: #067647;
+  --ok-bg: #ecfdf3;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
+}
+.app { min-height: 100vh; }
+main { max-width: 1100px; margin: 0 auto; padding: 24px 24px 64px; }
+
+.topbar {
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 24px;
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; gap: 26px;
+}
+.brand { font-size: 17px; font-weight: 700; color: var(--ink); text-decoration: none; }
+.brand-sub { color: var(--accent); font-weight: 500; }
+.nav { display: flex; gap: 16px; font-size: 13.5px; }
+.nav a { color: var(--muted); text-decoration: none; padding: 4px 2px; }
+.nav a:hover { color: var(--ink); }
+.nav a.active { color: var(--accent); font-weight: 600; }
+
+h1 { font-size: 24px; margin: 14px 0 8px; }
+h2 { font-size: 16px; margin: 20px 0 8px; }
+p { line-height: 1.55; }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+code, .mono { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; }
+
+.panel {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+  padding: 16px 18px;
+}
+.card-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px; margin-top: 18px;
+}
+.card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+  padding: 16px 18px; text-decoration: none; color: var(--ink);
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.card:hover { border-color: var(--accent); box-shadow: 0 2px 10px rgba(23, 92, 211, 0.10); }
+.card h3 { margin: 0 0 6px; font-size: 15px; }
+.card p { margin: 0; color: var(--muted); font-size: 13px; }
+.chip {
+  display: inline-block; padding: 2px 8px; border-radius: 999px;
+  font-size: 12px; font-weight: 600;
+  color: var(--accent); background: var(--accent-soft);
+}
+.chip.soon { color: var(--muted); background: #f2f4f7; }
+
+/* ---- conversion graphs ---- */
+.toggle { display: flex; gap: 8px; margin: 14px 0; }
+.toggle button {
+  padding: 7px 14px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel); font-size: 13px; cursor: pointer; color: var(--ink);
+}
+.toggle button.active {
+  background: var(--accent); border-color: var(--accent); color: white; font-weight: 600;
+}
+.graph-wrap { position: relative; }
+.graph-svg { width: 100%; height: auto; display: block; }
+
+.graph-node rect {
+  fill: var(--panel); stroke: var(--line); stroke-width: 1.2;
+  transition: stroke 0.12s;
+}
+.graph-node text {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 12.5px; fill: var(--ink);
+}
+.graph-node.hot rect { stroke: var(--accent); stroke-width: 2; }
+.graph-node.dim { opacity: 0.35; }
+
+.graph-edge { transition: opacity 0.12s; }
+.graph-edge path.line { fill: none; stroke: #9db4d8; stroke-width: 1.6; }
+.graph-edge path.hit { fill: none; stroke: transparent; stroke-width: 16; cursor: pointer; }
+.graph-edge.hot path.line { stroke: var(--accent); stroke-width: 2.6; }
+.graph-edge.dim { opacity: 0.16; }
+
+.graph-tip {
+  position: absolute; pointer-events: none; z-index: 5;
+  background: var(--ink); color: white; border-radius: 8px;
+  padding: 8px 11px; font-size: 12.5px; max-width: 300px;
+  box-shadow: 0 4px 16px rgba(16, 24, 40, 0.25);
+}
+.graph-tip .route { font-family: ui-monospace, Menlo, monospace; font-weight: 600; }
+.graph-tip .conv { color: #b9ccf1; margin-top: 3px; }
+.graph-legend { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 10px; }

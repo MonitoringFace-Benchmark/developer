@@ -1,0 +1,197 @@
+{
+ "generated_at": "2026-08-20T19:52:18+00:00",
+ "framework_commit": "2206ffb7db312a6406222b43c32a6575fde137c6",
+ "trace": {
+  "nodes": [
+   "csv",
+   "csv-linear",
+   "dejavu",
+   "dejavu-encoded",
+   "dejavu-linear",
+   "monpoly",
+   "monpoly-linear",
+   "ooo-csv"
+  ],
+  "edges": [
+   {
+    "from": "csv",
+    "to": "dejavu",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "csv",
+    "to": "dejavu-encoded",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "csv",
+    "to": "dejavu-linear",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "csv",
+    "to": "monpoly",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "csv",
+    "to": "monpoly-linear",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "csv",
+    "to": "ooo-csv",
+    "converters": [
+     "OutOfOrderConverter"
+    ]
+   },
+   {
+    "from": "dejavu",
+    "to": "csv",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "dejavu",
+    "to": "csv-linear",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "dejavu",
+    "to": "monpoly",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "dejavu",
+    "to": "monpoly-linear",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "monpoly",
+    "to": "csv",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "monpoly",
+    "to": "csv-linear",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "monpoly",
+    "to": "dejavu",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "monpoly",
+    "to": "dejavu-encoded",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "monpoly",
+    "to": "dejavu-linear",
+    "converters": [
+     "ReplayerConverter"
+    ]
+   },
+   {
+    "from": "ooo-csv",
+    "to": "csv",
+    "converters": [
+     "OutOfOrderConverter"
+    ]
+   }
+  ]
+ },
+ "policy": {
+  "nodes": [
+   "mfotl",
+   "negated-mfotl",
+   "negated-unicode-mfotl",
+   "qtl",
+   "unicode-mfotl"
+  ],
+  "edges": [
+   {
+    "from": "mfotl",
+    "to": "negated-mfotl",
+    "converters": [
+     "NegateMFOTLConverter"
+    ]
+   },
+   {
+    "from": "mfotl",
+    "to": "qtl",
+    "converters": [
+     "QTLConverter"
+    ]
+   },
+   {
+    "from": "mfotl",
+    "to": "unicode-mfotl",
+    "converters": [
+     "UnicodeMFOTLConverter"
+    ]
+   },
+   {
+    "from": "negated-mfotl",
+    "to": "negated-mfotl",
+    "converters": [
+     "NegateMFOTLConverter"
+    ]
+   },
+   {
+    "from": "negated-mfotl",
+    "to": "negated-unicode-mfotl",
+    "converters": [
+     "UnicodeMFOTLConverter"
+    ]
+   },
+   {
+    "from": "negated-mfotl",
+    "to": "qtl",
+    "converters": [
+     "QTLConverter"
+    ]
+   },
+   {
+    "from": "negated-unicode-mfotl",
+    "to": "negated-mfotl",
+    "converters": [
+     "UnicodeMFOTLConverter"
+    ]
+   },
+   {
+    "from": "unicode-mfotl",
+    "to": "mfotl",
+    "converters": [
+     "UnicodeMFOTLConverter"
+    ]
+   }
+  ]
+ }
+}
