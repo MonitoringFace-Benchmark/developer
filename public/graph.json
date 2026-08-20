@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-20T19:52:18+00:00",
+ "generated_at": "2026-08-20T20:11:14+00:00",
  "framework_commit": "2206ffb7db312a6406222b43c32a6575fde137c6",
  "trace": {
   "nodes": [
@@ -10,7 +10,8 @@
    "dejavu-linear",
    "monpoly",
    "monpoly-linear",
-   "ooo-csv"
+   "ooo-csv",
+   "srv-trace"
   ],
   "edges": [
    {
@@ -132,7 +133,9 @@
    "mfotl",
    "negated-mfotl",
    "negated-unicode-mfotl",
+   "ooo-fragment",
    "qtl",
+   "srv-policy",
    "unicode-mfotl"
   ],
   "edges": [

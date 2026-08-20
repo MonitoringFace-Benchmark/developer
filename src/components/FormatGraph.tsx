@@ -52,19 +52,21 @@ function edgePath(a: Pt, b: Pt): string {
   return `M ${a.x} ${a.y} Q ${mx + px * BEND} ${my + py * BEND} ${b.x} ${b.y}`;
 }
 
-/** Self-loop drawn on the side of the node facing away from the center. */
+/** Self-loop drawn on the side of the node facing away from the center.
+ * Both anchors are computed with borderPoint so they always sit on the
+ * node's border, regardless of the node's angle or label width. */
 function loopPath(center: Pt, label: string): string {
-  const ux = (center.x - CX) / (Math.hypot(center.x - CX, center.y - CY) || 1);
-  const uy = (center.y - CY) / (Math.hypot(center.x - CX, center.y - CY) || 1);
-  const hw = nodeWidth(label) / 2;
-  const a = {
-    x: center.x + ux * hw * 0.4 - uy * 12,
-    y: center.y + uy * (NODE_H / 2 + GAP) + ux * 12,
-  };
-  const b = {
-    x: center.x + ux * hw * 0.4 + uy * 12,
-    y: center.y + uy * (NODE_H / 2 + GAP) - ux * 12,
-  };
+  const L = Math.hypot(center.x - CX, center.y - CY) || 1;
+  const ux = (center.x - CX) / L;
+  const uy = (center.y - CY) / L;
+  const a = borderPoint(center, label, {
+    x: center.x + ux * 120 - uy * 48,
+    y: center.y + uy * 120 + ux * 48,
+  });
+  const b = borderPoint(center, label, {
+    x: center.x + ux * 120 + uy * 48,
+    y: center.y + uy * 120 - ux * 48,
+  });
   const c1 = { x: a.x + ux * 52 - uy * 30, y: a.y + uy * 52 + ux * 30 };
   const c2 = { x: b.x + ux * 52 + uy * 30, y: b.y + uy * 52 - ux * 30 };
   return `M ${a.x} ${a.y} C ${c1.x} ${c1.y} ${c2.x} ${c2.y} ${b.x} ${b.y}`;
@@ -105,8 +107,8 @@ export default function FormatGraph({ nodes, edges }: Props) {
   function nodeState(n: string): 'hot' | 'dim' | '' {
     if (hoverNode === n) return 'hot';
     if (hoverEdge !== null) {
-      const e = edges[hoverEdge];
-      if (e.from === n || e.to === n) return 'hot';
+      const e = edges[hoverEdge]; // may be stale for one render; never assume
+      if (e && (e.from === n || e.to === n)) return 'hot';
     }
     if (anyHover) return 'dim';
     return '';
@@ -194,7 +196,7 @@ export default function FormatGraph({ nodes, edges }: Props) {
           className="graph-tip"
           style={{
             left: Math.min(tip.x + 14, (wrapRef.current?.clientWidth ?? W) - 240),
-            top: tip.y + 12,
+            top: Math.min(tip.y + 12, (wrapRef.current?.clientHeight ?? H) - 64),
           }}
         >
           <div className="route">

@@ -21,8 +21,14 @@ import os
 
 
 def export_family(path_manager: PathManager, ttype: str) -> dict:
+    from Infrastructure.AutoConversion.InputOutputTraceFormats import InputOutputTraceFormats
+    from Infrastructure.AutoConversion.InputOutputPolicyFormats import InputOutputPolicyFormats
+    enum = InputOutputTraceFormats if ttype == "DataConverters" else InputOutputPolicyFormats
+
     mapping = AutoConversionMapping(path_manager, ttype).mappings
-    nodes = set()
+    # every declared format is a vertex, converterless ones included: a format
+    # with no edges is honest information (it exists, nothing routes to it)
+    nodes = {f.value for f in enum}
     edges = []
     for (src, dst), converters in sorted(mapping.items(), key=lambda kv: (kv[0][0].value, kv[0][1].value)):
         nodes.add(src.value)

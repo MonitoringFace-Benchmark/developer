@@ -55,7 +55,9 @@ export default function ConversionGraphs() {
         </button>
       </div>
       <div className="panel">
-        <FormatGraph nodes={family.nodes} edges={family.edges} />
+        {/* key remounts the graph on toggle: hover state must never survive
+            into a family with fewer edges */}
+        <FormatGraph key={kind} nodes={family.nodes} edges={family.edges} />
         <div className="graph-legend muted small">
           <span>
             {family.nodes.length} formats · {family.edges.length} conversions
